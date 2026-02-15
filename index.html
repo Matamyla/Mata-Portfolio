@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myla D. Mata - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: #0a0118;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0a0118, #1a0b2e, #2d1b4e, #1a0b2e, #0a0118);
+            background-size: 400% 400%;
+            animation: gradientMove 20s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glowing Orbs */
+        .orb-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: orbMovement 30s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #ff6ec7, #ff1cf7);
+            top: -300px;
+            left: -300px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #00f5ff, #00b4d8);
+            bottom: -250px;
+            right: -250px;
+            animation-delay: 10s;
+        }
+
+        .orb-3 {
+            width: 550px;
+            height: 550px;
+            background: linear-gradient(135deg, #c77dff, #7209b7);
+            top: 40%;
+            left: 50%;
+            animation-delay: 20s;
+        }
+
+        @keyframes orbMovement {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(200px, -200px) scale(1.2);
+            }
+            50% {
+                transform: translate(-150px, 200px) scale(0.8);
+            }
+            75% {
+                transform: translate(150px, 150px) scale(1.1);
+            }
+        }
+
+        /* Mesh Grid Background */
+        .mesh-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(255, 110, 199, 0.03) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 110, 199, 0.03) 2px, transparent 2px);
+            background-size: 60px 60px;
+            animation: meshMove 30s linear infinite;
+        }
+
+        @keyframes meshMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 110, 199, 0.2);
+            border-radius: 50px;
+            padding: 22px 45px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            box-shadow: 
+                0 8px 32px rgba(255, 110, 199, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.03);
+            animation: navFloat 1s ease-out;
+        }
+
+        @keyframes navFloat {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 12px 30px;
+            border-radius: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 110, 199, 0.3), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        nav a:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 110, 199, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 25px rgba(255, 110, 199, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .profile-section {
+            position: relative;
+            margin-bottom: 60px;
+            animation: profileReveal 1.5s ease-out;
+        }
+
+        @keyframes profileReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.3) rotate(-90deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .diamond-container {
+            width: 240px;
+            height: 240px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .diamond {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6ec7, #c77dff, #00f5ff);
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 80px rgba(255, 110, 199, 0.6),
+                0 0 120px rgba(199, 125, 255, 0.4);
+            animation: diamondSpin 20s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes diamondSpin {
+            0% { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+
+        .diamond-inner {
+            transform: rotate(-45deg);
+            font-size: 6em;
+            font-weight: 900;
+            color: #0a0118;
+            z-index: 2;
+        }
+
+        .diamond::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: diamondShine 3s infinite;
+        }
+
+        @keyframes diamondShine {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .diamond-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            border: 3px solid rgba(255, 110, 199, 0.4);
+            transform: rotate(45deg);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .glow-1 {
+            animation-delay: 0s;
+        }
+
+        .glow-2 {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            animation-delay: 1s;
+        }
+
+        .glow-3 {
+            width: 160%;
+            height: 160%;
+            top: -30%;
+            left: -30%;
+            animation-delay: 2s;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: rotate(45deg) scale(1);
+            }
+            50% {
+                opacity: 0.2;
+                transform: rotate(45deg) scale(1.1);
+            }
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .hero h1 {
+            font-size: 5.5em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff, #ff6ec7, #c77dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroTitle 1.5s ease-out;
+            line-height: 1.2;
+        }
+
+        @keyframes heroTitle {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 2.2em;
+            color: #ff6ec7;
+            margin-bottom: 18px;
+            font-weight: 600;
+            animation: heroTitle 1.5s ease-out 0.3s both;
+        }
+
+        .hero .course {
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            animation: heroTitle 1.5s ease-out 0.6s both;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title {
+            font-size: 4.5em;
+            font-weight: 900;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6ec7, #c77dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6ec7, #c77dff, #00f5ff);
+            border-radius: 3px;
+            box-shadow: 0 0 30px rgba(255, 110, 199, 0.8);
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.4em;
+            margin-top: 30px;
+        }
+
+        /* Futuristic Card */
+        .futuristic-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 110, 199, 0.2);
+            border-radius: 35px;
+            padding: 70px 60px;
+            box-shadow: 
+                0 8px 32px rgba(255, 110, 199, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.02);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .futuristic-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 110, 199, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: cardGlimmer 6s infinite;
+        }
+
+        @keyframes cardGlimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .futuristic-card:hover {
+            transform: translateY(-20px);
+            border-color: rgba(255, 110, 199, 0.5);
+            box-shadow: 
+                0 30px 80px rgba(255, 110, 199, 0.4),
+                inset 0 0 60px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Career Objective */
+        .objective-content {
+            font-size: 1.6em;
+            line-height: 2.1;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objective-icon {
+            font-size: 6em;
+            margin-bottom: 40px;
+            display: block;
+            filter: drop-shadow(0 0 40px rgba(255, 110, 199, 0.7));
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(10deg);
+            }
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .skill-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 110, 199, 0.2);
+            border-radius: 30px;
+            padding: 55px 45px;
+            text-align: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6ec7, #c77dff, #00f5ff);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .skill-box:hover::after {
+            transform: scaleX(1);
+        }
+
+        .skill-box:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: rgba(255, 110, 199, 0.6);
+            box-shadow: 
+                0 30px 80px rgba(255, 110, 199, 0.5),
+                inset 0 0 50px rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-icon-box {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 35px;
+            background: linear-gradient(135deg, #ff6ec7, #c77dff);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            transition: all 0.5s ease;
+            box-shadow: 0 15px 50px rgba(255, 110, 199, 0.5);
+        }
+
+        .skill-box:hover .skill-icon-box {
+            transform: rotateY(360deg) scale(1.15);
+            box-shadow: 0 20px 70px rgba(255, 110, 199, 0.8);
+        }
+
+        .skill-box h3 {
+            font-size: 1.9em;
+            margin-bottom: 20px;
+            color: #ff6ec7;
+            font-weight: 800;
+        }
+
+        .skill-box p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 110, 199, 0.2);
+            border-radius: 30px;
+            padding: 55px 45px;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 110, 199, 0.6);
+            box-shadow: 0 25px 70px rgba(255, 110, 199, 0.5);
+        }
+
+        .contact-icon-circle {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #ff6ec7, #c77dff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+            animation: contactBreath 3s ease-in-out infinite;
+        }
+
+        @keyframes contactBreath {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(255, 110, 199, 0.6);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 70px rgba(255, 110, 199, 0.9);
+            }
+        }
+
+        .contact-box h3 {
+            font-size: 1.7em;
+            color: #ff6ec7;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .contact-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            word-break: break-word;
+        }
+
+        .contact-box a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box a:hover {
+            color: #ff6ec7;
+            text-shadow: 0 0 15px rgba(255, 110, 199, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 70px 20px;
+            margin-top: 100px;
+            border-top: 2px solid rgba(255, 110, 199, 0.3);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.2em;
+            margin-bottom: 18px;
+        }
+
+        .footer-highlight {
+            color: #ff6ec7;
+            font-weight: 800;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.6em;
+            }
+
+            .section-title {
+                font-size: 2.8em;
+            }
+
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 20px;
+                padding: 20px 30px;
+            }
+
+            .diamond-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .diamond-inner {
+                font-size: 4.5em;
+            }
+
+            .futuristic-card {
+                padding: 45px 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="mesh-bg"></div>
+    
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#objective">Objective</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero" id="home">
+            <div class="profile-section">
+                <div class="diamond-container">
+                    <div class="diamond-glow glow-1"></div>
+                    <div class="diamond-glow glow-2"></div>
+                    <div class="diamond-glow glow-3"></div>
+                    <div class="diamond">
+                        <div class="diamond-inner">MM</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>Myla D. Mata</h1>
+                <p class="subtitle">BSIT 3 Northeast</p>
+                <p class="course">Bachelor of Science in Information Technology</p>
+            </div>
+        </div>
+
+        <!-- Career Objective -->
+        <section id="objective">
+            <div class="section-header">
+                <h2 class="section-title">Career Objectives</h2>
+                <p class="section-subtitle">My Professional Vision & Goals</p>
+            </div>
+            <div class="futuristic-card">
+                <span class="objective-icon">🎯</span>
+                <p class="objective-content">
+                    To secure a position where I can apply my knowledge and skills in Information Technology, gain hands-on experience, and contribute to the growth of the organization while continuously improving my technical and professional abilities.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-subtitle">Core Competencies</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <div class="skill-icon-box">⏰</div>
+                    <h3>Time Management</h3>
+                    <p>Expert at organizing tasks, prioritizing responsibilities, and managing time efficiently to meet deadlines and achieve optimal productivity</p>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-icon-box">🤝</div>
+                    <h3>Teamwork</h3>
+                    <p>Strong collaborative skills with the ability to work effectively in diverse teams, contribute to group success, and foster positive working relationships</p>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-icon-box">💬</div>
+                    <h3>Communication Skills</h3>
+                    <p>Excellent verbal and written communication abilities to convey ideas clearly, listen actively, and engage effectively with stakeholders</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's Connect</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-box">
+                    <div class="contact-icon-circle">📱</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:09120250847">0912 025 0847</a></p>
+                </div>
+                <div class="contact-box">
+                    <div class="contact-icon-circle">📧</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:mylamata@gmail.com">mylamata@gmail.com</a></p>
+                </div>
+                <div class="contact-box">
+                    <div class="contact-icon-circle">📍</div>
+                    <h3>Address</h3>
+                    <p>Baod, Bantayan, Cebu</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <span class="footer-highlight">Myla D. Mata</span>. All Rights Reserved.</p>
+        <p>Aspiring IT Professional | <span class="footer-highlight">Dedicated</span> to Growth and Excellence</p>
+    </footer>
+</body>
+</html>
